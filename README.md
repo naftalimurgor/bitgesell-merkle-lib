@@ -1,14 +1,15 @@
-# merkle-lib
+# bitgesell-merkle-lib
 
-[![Build Status](https://travis-ci.org/bitcoinjs/merkle-lib.png?branch=master)](https://travis-ci.org/bitcoinjs/merkle-lib)
-[![NPM](https://img.shields.io/npm/v/merkle-lib.svg)](https://www.npmjs.org/package/merkle-lib)
+<img src="Icon.png" style="height: 60px;"/>
+
+[![NPM](https://img.shields.io/npm/v/merkle-lib.svg)](https://www.npmjs.org/package/bitgesell-merkle-lib)
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-A performance conscious library for merkle root and tree calculations.
+A performance conscious library for merkle root and tree calculations for Bitgesell Blockchain Network.
 
 
-## Warnings
+## Disclaimer
 This implementation is vulnerable to a forgery attack [as a second pre-image attack](https://en.wikipedia.org/wiki/Merkle_tree#Second_preimage_attack), see these[\[1\]](https://crypto.stackexchange.com/questions/2106/what-is-the-purpose-of-using-different-hash-functions-for-the-leaves-and-interna)[\[2\]](https://crypto.stackexchange.com/questions/43430/what-is-the-reason-to-separate-domains-in-the-internal-hash-algorithm-of-a-merkl/44971#44971) crypto.stackexchange questions for an explanation.
 To avoid this vulnerability,  you should pre-hash your leaves *using a different hash function* than the function provided such that `H(x) != H'(x)`.
 
@@ -16,16 +17,17 @@ Additionally, this implementation is vulnerable to a forgery attack [for an unba
 To avoid this vulnerability [in this implementation],  do not accept unbalanced merkle trees in your application.
 
 
-## Examples
+## Usage
+
 Preamble
 ``` javascript
-var crypto = require('crypto')
+const crypto = require('crypto')
 
 function sha256 (data) {
   return crypto.createHash('sha256').update(data).digest()
 }
 
-var data = [
+const data = [
   'cafebeef',
   'ffffffff',
   'aaaaaaaa',
@@ -38,8 +40,8 @@ var data = [
 
 Tree
 ``` javascript
-var merkle = require('merkle-lib')
-var tree = merkle(data, sha256)
+const { merkleTree } = require('bitgesell-merkle-lib')
+const tree = merkleTree(data, sha256)
 
 console.log(tree.map(x => x.toString('hex')))
 // => [
@@ -59,17 +61,22 @@ console.log(tree.map(x => x.toString('hex')))
 
 Root only (equivalent to `tree[tree.length - 1]`)
 ``` javascript
-var fastRoot = require('merkle-lib/fastRoot')
-var root = fastRoot(data, sha256)
+const { 
+  fastRoot, 
+  verify
+} = require('bitgesell-merkle-lib')
+
+const root = fastRoot(data, sha256)
 
 console.log(root.toString('hex'))
 // => 'c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1'
 ```
 
 Proof (with verify)
+
 ``` javascript
-var merkleProof = require('merkle-lib/proof')
-var proof = merkleProof(tree, data[0])
+const {merkleProof} = require('bitgesell-merkle-lib')
+const proof = merkleProof(tree, data[0])
 
 if (proof === null) {
   console.error('No proof exists!')
@@ -86,10 +93,11 @@ console.log(proof.map(x => x && x.toString('hex')))
 //   'c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1'
 // ]
 
-console.log(merkleProof.verify(proof, sha256))
+console.log(verify(proof, sha256))
 // => true
 ```
-
+## API
+For an indepth documentation refer to [docs]() also see [usage](usage/) for practical usage.
 
 #### Credits
 Thanks to [Meni Rosenfield on bitcointalk](https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025) for the math.
