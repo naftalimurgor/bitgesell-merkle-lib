@@ -15,7 +15,7 @@ function treeWidth(n: number, h: number) {
  * @param leaf 
  * @returns the nodes in the tree leaf
  */
-function merkleProof(tree: Array<Uint8Array>, leaf: Uint8Array) {
+export function merkleProof(tree: Array<Uint8Array>, leaf: Uint8Array) {
   let index = tree.indexOf(leaf)
 
   // does the leaf node even exist [in the tree]?
@@ -64,7 +64,7 @@ function merkleProof(tree: Array<Uint8Array>, leaf: Uint8Array) {
   return nodes
 }
 
-function verify(proof: Array<Buffer>, digestFn: (data: Buffer) => Buffer) {
+export function verify(proof: Array<Buffer>, digestFn: (data: Buffer) => Buffer) {
   let root = proof[proof.length - 1]
   let hash = root
 
@@ -77,5 +77,3 @@ function verify(proof: Array<Buffer>, digestFn: (data: Buffer) => Buffer) {
 
   return hash.equals(root)
 }
-
-export { merkleProof, verify }
