@@ -2,8 +2,6 @@
 
 <img src="Icon.png" style="height: 60px;"/>
 
-[![NPM](https://img.shields.io/npm/v/merkle-lib.svg)](https://www.npmjs.org/package/bitgesell-merkle-lib)
-
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 A performance conscious library for merkle root and tree calculations for Bitgesell Blockchain Network.
@@ -97,7 +95,14 @@ console.log(verify(proof, sha256))
 // => true
 ```
 ## API
-For an indepth documentation refer to [docs]() also see [usage](usage/) for practical usage.
+For an indepth documentation refer to [docs](https://naftalimurgor.github.io/bitgesell-merkle-lib/) also see [usage](usage/) for practical usage.
+
+## Tests
+To run tests,
+```sh
+npm install
+npm run unit
+```
 
 #### Credits
 Thanks to [Meni Rosenfield on bitcointalk](https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025) for the math.

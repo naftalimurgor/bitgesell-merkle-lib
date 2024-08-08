@@ -1,4 +1,3 @@
-// returns an array of hashes of length: values.length / 2 + (values.length % 2)
 import {
   verify,
   merkleProof
@@ -8,6 +7,7 @@ import {
   fastRoot
 } from './fastRoot'
 
+// returns an array of hashes of length: values.length / 2 + (values.length % 2)
 function _derive(values: Array<Uint8Array>, digestFn: (data: Buffer) => Buffer) {
   const length = values.length
   const results = []
