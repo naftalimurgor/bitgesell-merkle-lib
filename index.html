@@ -1,218 +1,30 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>bitgesell-merkle-lib</title>
-	<meta name="description" content="Documentation for bitgesell-merkle-lib">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">bitgesell-merkle-lib</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>bitgesell-merkle-lib</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#bitgesell-merkle-lib" id="bitgesell-merkle-lib" style="color: inherit; text-decoration: none;">
-					<h1>bitgesell-merkle-lib</h1>
-				</a>
-				<img src="Icon.png" style="height: 60px;"/>
-				<p><a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/badge.svg" alt="js-standard-style"></a></p>
-				<p>A performance conscious library for merkle root and tree calculations for Bitgesell Blockchain Network.</p>
-				<a href="#disclaimer" id="disclaimer" style="color: inherit; text-decoration: none;">
-					<h2>Disclaimer</h2>
-				</a>
-				<p>This implementation is vulnerable to a forgery attack <a href="https://en.wikipedia.org/wiki/Merkle_tree#Second_preimage_attack">as a second pre-image attack</a>, see these<a href="https://crypto.stackexchange.com/questions/2106/what-is-the-purpose-of-using-different-hash-functions-for-the-leaves-and-interna">[1]</a><a href="https://crypto.stackexchange.com/questions/43430/what-is-the-reason-to-separate-domains-in-the-internal-hash-algorithm-of-a-merkl/44971#44971">[2]</a> crypto.stackexchange questions for an explanation.
-				To avoid this vulnerability,  you should pre-hash your leaves <em>using a different hash function</em> than the function provided such that <code>H(x) != H&#39;(x)</code>.</p>
-				<p>Additionally, this implementation is vulnerable to a forgery attack <a href="https://bitcointalk.org/?topic=102395">for an unbalanced merkle tree</a>,  wherein,  in an unbalanced merkle tree, the last leaf node can be duplicated to create an artificial balanced tree,  resulting in the same root hash.
-				To avoid this vulnerability [in this implementation],  do not accept unbalanced merkle trees in your application.</p>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<p>Preamble</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> crypto = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;crypto&#x27;</span>)
+<!DOCTYPE html><html class="default" lang="en"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>bitgesell-merkle-lib</title><meta name="description" content="Documentation for bitgesell-merkle-lib"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">bitgesell-merkle-lib</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>bitgesell-merkle-lib</h2></div><div class="tsd-panel tsd-typography"><a id="md:bitgesell-merkle-lib" class="tsd-anchor"></a><h1 class="tsd-anchor-link">bitgesell-merkle-lib<a href="#md:bitgesell-merkle-lib" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><img src="media/Icon.png" style="height: 60px;"/>
+<p><a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/badge.svg" alt="js-standard-style"></a></p>
+<p>A performance conscious library for merkle root and tree calculations for Bitgesell Blockchain Network.</p>
+<a id="md:disclaimer" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Disclaimer<a href="#md:disclaimer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>This implementation is vulnerable to a forgery attack <a href="https://en.wikipedia.org/wiki/Merkle_tree#Second_preimage_attack">as a second pre-image attack</a>, see these<a href="https://crypto.stackexchange.com/questions/2106/what-is-the-purpose-of-using-different-hash-functions-for-the-leaves-and-interna">[1]</a><a href="https://crypto.stackexchange.com/questions/43430/what-is-the-reason-to-separate-domains-in-the-internal-hash-algorithm-of-a-merkl/44971#44971">[2]</a> crypto.stackexchange questions for an explanation.
+To avoid this vulnerability,  you should pre-hash your leaves <em>using a different hash function</em> than the function provided such that <code>H(x) != H'(x)</code>.</p>
+<p>Additionally, this implementation is vulnerable to a forgery attack <a href="https://bitcointalk.org/?topic=102395">for an unbalanced merkle tree</a>,  wherein,  in an unbalanced merkle tree, the last leaf node can be duplicated to create an artificial balanced tree,  resulting in the same root hash.
+To avoid this vulnerability [in this implementation],  do not accept unbalanced merkle trees in your application.</p>
+<a id="md:usage" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Usage<a href="#md:usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Preamble</p>
+<pre><code class="javascript"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">crypto</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;crypto&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-0">function</span><span class="hl-1"> </span><span class="hl-3">sha256</span><span class="hl-1"> (</span><span class="hl-5">data</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-6">return</span><span class="hl-1"> </span><span class="hl-5">crypto</span><span class="hl-1">.</span><span class="hl-3">createHash</span><span class="hl-1">(</span><span class="hl-4">&#39;sha256&#39;</span><span class="hl-1">).</span><span class="hl-3">update</span><span class="hl-1">(</span><span class="hl-5">data</span><span class="hl-1">).</span><span class="hl-3">digest</span><span class="hl-1">()</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">data</span><span class="hl-1"> = [</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;cafebeef&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;ffffffff&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;aaaaaaaa&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;bbbbbbbb&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;cccccccc&#39;</span><br/><span class="hl-1">].</span><span class="hl-3">map</span><span class="hl-1">(</span><span class="hl-5">x</span><span class="hl-1"> </span><span class="hl-0">=&gt;</span><span class="hl-1"> </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-3">Buffer</span><span class="hl-1">(</span><span class="hl-5">x</span><span class="hl-1">, </span><span class="hl-4">&#39;hex&#39;</span><span class="hl-1">))</span><br/><br/><span class="hl-7">// ... now, the examples</span>
+</code><button type="button">Copy</button></pre>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sha256</span> (<span class="hljs-params">data</span>) </span>{
-  <span class="hljs-keyword">return</span> crypto.createHash(<span class="hljs-string">&#x27;sha256&#x27;</span>).update(data).digest()
-}
+<p>Tree</p>
+<pre><code class="javascript"><span class="hl-0">const</span><span class="hl-1"> { </span><span class="hl-2">merkleTree</span><span class="hl-1"> } = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;bitgesell-merkle-lib&#39;</span><span class="hl-1">)</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">tree</span><span class="hl-1"> = </span><span class="hl-3">merkleTree</span><span class="hl-1">(</span><span class="hl-5">data</span><span class="hl-1">, </span><span class="hl-5">sha256</span><span class="hl-1">)</span><br/><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-5">tree</span><span class="hl-1">.</span><span class="hl-3">map</span><span class="hl-1">(</span><span class="hl-5">x</span><span class="hl-1"> </span><span class="hl-0">=&gt;</span><span class="hl-1"> </span><span class="hl-5">x</span><span class="hl-1">.</span><span class="hl-3">toString</span><span class="hl-1">(</span><span class="hl-4">&#39;hex&#39;</span><span class="hl-1">)))</span><br/><span class="hl-7">// =&gt; [</span><br/><span class="hl-7">//  &#39;cafebeef&#39;,</span><br/><span class="hl-7">//  &#39;ffffffff&#39;,</span><br/><span class="hl-7">//  &#39;aaaaaaaa&#39;,</span><br/><span class="hl-7">//  &#39;bbbbbbbb&#39;,</span><br/><span class="hl-7">//  &#39;cccccccc&#39;,</span><br/><span class="hl-7">//  &#39;bda5c39dec343da54ce91c57bf8e796c2ca16a1bd8cae6a2cefbdd16efc32578&#39;,</span><br/><span class="hl-7">//  &#39;8b722baf6775a313f1032ba9984c0dce32ff3c40d7a67b5df8de4dbaa43a3db0&#39;,</span><br/><span class="hl-7">//  &#39;3d2f424783df5853c8d7121b1371650c04241f318e1b0cd46bedbc805b9164c3&#39;,</span><br/><span class="hl-7">//  &#39;bb232963fd0efdeacb0fd76e26cf69055fa5facc19a5f5c2f2f27a6925d1db2f&#39;,</span><br/><span class="hl-7">//  &#39;2256e70bea2c591190a0d4d6c1415acd7458fae84d8d85cdc68b851da27777d4&#39;,</span><br/><span class="hl-7">//  &#39;c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1&#39;</span><br/><span class="hl-7">//]</span>
+</code><button type="button">Copy</button></pre>
 
-<span class="hljs-keyword">const</span> data = [
-  <span class="hljs-string">&#x27;cafebeef&#x27;</span>,
-  <span class="hljs-string">&#x27;ffffffff&#x27;</span>,
-  <span class="hljs-string">&#x27;aaaaaaaa&#x27;</span>,
-  <span class="hljs-string">&#x27;bbbbbbbb&#x27;</span>,
-  <span class="hljs-string">&#x27;cccccccc&#x27;</span>
-].map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> <span class="hljs-keyword">new</span> Buffer(x, <span class="hljs-string">&#x27;hex&#x27;</span>))
+<p>Root only (equivalent to <code>tree[tree.length - 1]</code>)</p>
+<pre><code class="javascript"><span class="hl-0">const</span><span class="hl-1"> { </span><br/><span class="hl-1">  </span><span class="hl-2">fastRoot</span><span class="hl-1">, </span><br/><span class="hl-1">  </span><span class="hl-2">verify</span><br/><span class="hl-1">} = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;bitgesell-merkle-lib&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">root</span><span class="hl-1"> = </span><span class="hl-3">fastRoot</span><span class="hl-1">(</span><span class="hl-5">data</span><span class="hl-1">, </span><span class="hl-5">sha256</span><span class="hl-1">)</span><br/><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-5">root</span><span class="hl-1">.</span><span class="hl-3">toString</span><span class="hl-1">(</span><span class="hl-4">&#39;hex&#39;</span><span class="hl-1">))</span><br/><span class="hl-7">// =&gt; &#39;c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1&#39;</span>
+</code><button type="button">Copy</button></pre>
 
-<span class="hljs-comment">// ... now, the examples</span>
-</code></pre>
-				<p>Tree</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { merkleTree } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;bitgesell-merkle-lib&#x27;</span>)
-<span class="hljs-keyword">const</span> tree = merkleTree(data, sha256)
+<p>Proof (with verify)</p>
+<pre><code class="javascript"><span class="hl-0">const</span><span class="hl-1"> {</span><span class="hl-2">merkleProof</span><span class="hl-1">} = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;bitgesell-merkle-lib&#39;</span><span class="hl-1">)</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">proof</span><span class="hl-1"> = </span><span class="hl-3">merkleProof</span><span class="hl-1">(</span><span class="hl-5">tree</span><span class="hl-1">, </span><span class="hl-5">data</span><span class="hl-1">[</span><span class="hl-8">0</span><span class="hl-1">])</span><br/><br/><span class="hl-6">if</span><span class="hl-1"> (</span><span class="hl-5">proof</span><span class="hl-1"> === </span><span class="hl-0">null</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">error</span><span class="hl-1">(</span><span class="hl-4">&#39;No proof exists!&#39;</span><span class="hl-1">)</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-5">proof</span><span class="hl-1">.</span><span class="hl-3">map</span><span class="hl-1">(</span><span class="hl-5">x</span><span class="hl-1"> </span><span class="hl-0">=&gt;</span><span class="hl-1"> </span><span class="hl-5">x</span><span class="hl-1"> &amp;&amp; </span><span class="hl-5">x</span><span class="hl-1">.</span><span class="hl-3">toString</span><span class="hl-1">(</span><span class="hl-4">&#39;hex&#39;</span><span class="hl-1">)))</span><br/><span class="hl-7">// =&gt; [</span><br/><span class="hl-7">//   &#39;cafebeef&#39;,</span><br/><span class="hl-7">//   &#39;ffffffff&#39;,</span><br/><span class="hl-7">//   null,</span><br/><span class="hl-7">//   &#39;8b722baf6775a313f1032ba9984c0dce32ff3c40d7a67b5df8de4dbaa43a3db0&#39;,</span><br/><span class="hl-7">//   null,</span><br/><span class="hl-7">//   &#39;2256e70bea2c591190a0d4d6c1415acd7458fae84d8d85cdc68b851da27777d4&#39;,</span><br/><span class="hl-7">//   &#39;c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1&#39;</span><br/><span class="hl-7">// ]</span><br/><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-3">verify</span><span class="hl-1">(</span><span class="hl-5">proof</span><span class="hl-1">, </span><span class="hl-5">sha256</span><span class="hl-1">))</span><br/><span class="hl-7">// =&gt; true</span>
+</code><button type="button">Copy</button></pre>
 
-<span class="hljs-built_in">console</span>.log(tree.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.toString(<span class="hljs-string">&#x27;hex&#x27;</span>)))
-<span class="hljs-comment">// =&gt; [</span>
-<span class="hljs-comment">//  &#x27;cafebeef&#x27;,</span>
-<span class="hljs-comment">//  &#x27;ffffffff&#x27;,</span>
-<span class="hljs-comment">//  &#x27;aaaaaaaa&#x27;,</span>
-<span class="hljs-comment">//  &#x27;bbbbbbbb&#x27;,</span>
-<span class="hljs-comment">//  &#x27;cccccccc&#x27;,</span>
-<span class="hljs-comment">//  &#x27;bda5c39dec343da54ce91c57bf8e796c2ca16a1bd8cae6a2cefbdd16efc32578&#x27;,</span>
-<span class="hljs-comment">//  &#x27;8b722baf6775a313f1032ba9984c0dce32ff3c40d7a67b5df8de4dbaa43a3db0&#x27;,</span>
-<span class="hljs-comment">//  &#x27;3d2f424783df5853c8d7121b1371650c04241f318e1b0cd46bedbc805b9164c3&#x27;,</span>
-<span class="hljs-comment">//  &#x27;bb232963fd0efdeacb0fd76e26cf69055fa5facc19a5f5c2f2f27a6925d1db2f&#x27;,</span>
-<span class="hljs-comment">//  &#x27;2256e70bea2c591190a0d4d6c1415acd7458fae84d8d85cdc68b851da27777d4&#x27;,</span>
-<span class="hljs-comment">//  &#x27;c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1&#x27;</span>
-<span class="hljs-comment">//]</span>
-</code></pre>
-				<p>Root only (equivalent to <code>tree[tree.length - 1]</code>)</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {
-  fastRoot, 
-  verify
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;bitgesell-merkle-lib&#x27;</span>)
+<a id="md:api" class="tsd-anchor"></a><h2 class="tsd-anchor-link">API<a href="#md:api" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>For an indepth documentation refer to <a href="https://naftalimurgor.github.io/bitgesell-merkle-lib/">docs</a> also see <a href="usage/">usage</a> for practical usage.</p>
+<a id="md:tests" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Tests<a href="#md:tests" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>To run tests,</p>
+<pre><code class="sh"><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">install</span><br/><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">unit</span>
+</code><button type="button">Copy</button></pre>
 
-<span class="hljs-keyword">const</span> root = fastRoot(data, sha256)
-
-<span class="hljs-built_in">console</span>.log(root.toString(<span class="hljs-string">&#x27;hex&#x27;</span>))
-<span class="hljs-comment">// =&gt; &#x27;c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1&#x27;</span>
-</code></pre>
-				<p>Proof (with verify)</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {merkleProof} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;bitgesell-merkle-lib&#x27;</span>)
-<span class="hljs-keyword">const</span> proof = merkleProof(tree, data[<span class="hljs-number">0</span>])
-
-<span class="hljs-keyword">if</span> (proof === <span class="hljs-literal">null</span>) {
-  <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&#x27;No proof exists!&#x27;</span>)
-}
-
-<span class="hljs-built_in">console</span>.log(proof.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &amp;&amp; x.toString(<span class="hljs-string">&#x27;hex&#x27;</span>)))
-<span class="hljs-comment">// =&gt; [</span>
-<span class="hljs-comment">//   &#x27;cafebeef&#x27;,</span>
-<span class="hljs-comment">//   &#x27;ffffffff&#x27;,</span>
-<span class="hljs-comment">//   null,</span>
-<span class="hljs-comment">//   &#x27;8b722baf6775a313f1032ba9984c0dce32ff3c40d7a67b5df8de4dbaa43a3db0&#x27;,</span>
-<span class="hljs-comment">//   null,</span>
-<span class="hljs-comment">//   &#x27;2256e70bea2c591190a0d4d6c1415acd7458fae84d8d85cdc68b851da27777d4&#x27;,</span>
-<span class="hljs-comment">//   &#x27;c2692b0e127b3b774a92f6e1d8ff8c3a5ea9eef9a1d389fe294f0a7a2fec9be1&#x27;</span>
-<span class="hljs-comment">// ]</span>
-
-<span class="hljs-built_in">console</span>.log(verify(proof, sha256))
-<span class="hljs-comment">// =&gt; true</span>
-</code></pre>
-				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
-					<h2>API</h2>
-				</a>
-				<p>For an indepth documentation refer to <a href="https://naftalimurgor.github.io/bitgesell-merkle-lib/">docs</a> also see <a href="usage/">usage</a> for practical usage.</p>
-				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
-					<h2>Tests</h2>
-				</a>
-				<p>To run tests,</p>
-				<pre><code class="language-sh">npm install
-npm run unit
-</code></pre>
-				<a href="#credits" id="credits" style="color: inherit; text-decoration: none;">
-					<h4>Credits</h4>
-				</a>
-				<p>Thanks to <a href="https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025">Meni Rosenfield on bitcointalk</a> for the math.</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-function">
-						<a href="globals.html#_derive" class="tsd-kind-icon">_derive</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#fastroot" class="tsd-kind-icon">fast<wbr>Root</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#merkleproof" class="tsd-kind-icon">merkle<wbr>Proof</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#merkletree" class="tsd-kind-icon">merkle<wbr>Tree</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#treenodecount" class="tsd-kind-icon">tree<wbr>Node<wbr>Count</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#treewidth" class="tsd-kind-icon">tree<wbr>Width</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#verify" class="tsd-kind-icon">verify</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<a id="md:credits" class="tsd-anchor"></a><h4 class="tsd-anchor-link">Credits<a href="#md:credits" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Thanks to <a href="https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025">Meni Rosenfield on bitcointalk</a> for the math.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:bitgesell-merkle-lib"><span>bitgesell-<wbr/>merkle-<wbr/>lib</span></a><ul><li><a href="#md:disclaimer"><span>Disclaimer</span></a></li><li><a href="#md:usage"><span>Usage</span></a></li><li><a href="#md:api"><span>API</span></a></li><li><a href="#md:tests"><span>Tests</span></a></li><li><ul><li><a href="#md:credits"><span>Credits</span></a></li></ul></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>bitgesell-merkle-lib</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
