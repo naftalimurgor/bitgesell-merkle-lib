@@ -1,12 +1,21 @@
 // returns an array of hashes of length: values.length / 2 + (values.length % 2)
-function _derive (values, digestFn) {
-  var length = values.length
-  var results = []
+import {
+  verify,
+  merkleProof
+} from './merkleProof'
 
-  for (var i = 0; i < length; i += 2) {
-    var left = values[i]
-    var right = i + 1 === length ? left : values[i + 1]
-    var data = Buffer.concat([left, right])
+import {
+  fastRoot
+} from './fastRoot'
+
+function _derive(values: Array<Uint8Array>, digestFn: (data: Buffer) => Buffer) {
+  const length = values.length
+  const results = []
+
+  for (let i = 0; i < length; i += 2) {
+    const left = values[i]
+    const right = i + 1 === length ? left : values[i + 1]
+    const data = Buffer.concat([left, right])
 
     results.push(digestFn(data))
   }
@@ -14,14 +23,19 @@ function _derive (values, digestFn) {
   return results
 }
 
-// returns the merkle tree
-function merkle (values, digestFn) {
+/**
+ * Returns the merkle tree
+ * @param values Array of hashes
+ * @param digestFn digest function to hash tree leafs
+ * @returns Merkle tree of hashes
+ */
+function merkleTree(values: Array<Uint8Array>, digestFn: (data: Buffer) => Buffer) {
   if (!Array.isArray(values)) throw TypeError('Expected values Array')
   if (typeof digestFn !== 'function') throw TypeError('Expected digest Function')
   if (values.length === 1) return values.concat()
 
-  var levels = [values]
-  var level = values
+  const levels = [values]
+  let level = values
 
   do {
     level = _derive(level, digestFn)
@@ -31,4 +45,9 @@ function merkle (values, digestFn) {
   return [].concat.apply([], levels)
 }
 
-module.exports = merkle
+export {
+  merkleProof,
+  verify,
+  merkleTree,
+  fastRoot
+}

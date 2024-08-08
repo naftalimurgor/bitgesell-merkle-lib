@@ -1,0 +1,76 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.verify = exports.merkleProof = void 0;
+// https://bitcointalk.org/index.php?topic=403231.msg9054025#msg9054025
+function treeNodeCount(leafCount) {
+    let count = 1;
+    for (let i = leafCount; i > 1; i = (i + 1) >> 1)
+        count += i;
+    return count;
+}
+function treeWidth(n, h) {
+    return (n + (1 << h) - 1) >> h;
+}
+/**
+ * @link https://github.com/naftalimurgor/bitgesell-merkle-lib/src/indext.ts
+ * @param tree The merkle tree data structure
+ * @param leaf
+ * @returns the nodes in the tree leaf
+ */
+function merkleProof(tree, leaf) {
+    let index = tree.indexOf(leaf);
+    // does the leaf node even exist [in the tree]?
+    if (index === -1)
+        return null;
+    let n = tree.length;
+    let nodes = [];
+    // does the far right leaf bypass a layer?
+    // determine hashable node count...
+    let z = treeWidth(n, 1);
+    while (z > 0) {
+        if (treeNodeCount(z) === n)
+            break;
+        --z;
+    }
+    // XXX: not reach-able (AFAIK) but handled anyway
+    if (z === 0)
+        throw new Error('Unknown solution');
+    let height = 0;
+    let i = 0;
+    while (i < n - 1) {
+        let layerWidth = treeWidth(z, height);
+        ++height;
+        let odd = index % 2;
+        if (odd)
+            --index;
+        let offset = i + index;
+        let left = tree[offset];
+        let right = index === (layerWidth - 1) ? left : tree[offset + 1];
+        if (i > 0) {
+            nodes.push(odd ? left : null);
+            nodes.push(odd ? null : right);
+        }
+        else {
+            nodes.push(left);
+            nodes.push(right);
+        }
+        index = (index / 2) | 0;
+        i += layerWidth;
+    }
+    nodes.push(tree[n - 1]);
+    return nodes;
+}
+exports.merkleProof = merkleProof;
+function verify(proof, digestFn) {
+    let root = proof[proof.length - 1];
+    let hash = root;
+    for (var i = 0; i < proof.length - 1; i += 2) {
+        let left = proof[i] || hash;
+        let right = proof[i + 1] || hash;
+        let data = Buffer.concat([left, right]);
+        hash = digestFn(data);
+    }
+    return hash.equals(root);
+}
+exports.verify = verify;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVya2xlUHJvb2YuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvbWVya2xlUHJvb2YudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsdUVBQXVFO0FBQ3ZFLFNBQVMsYUFBYSxDQUFDLFNBQWlCO0lBQ3RDLElBQUksS0FBSyxHQUFHLENBQUMsQ0FBQTtJQUNiLEtBQUssSUFBSSxDQUFDLEdBQUcsU0FBUyxFQUFFLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUM7UUFBRSxLQUFLLElBQUksQ0FBQyxDQUFBO0lBQzNELE9BQU8sS0FBSyxDQUFBO0FBQ2QsQ0FBQztBQUVELFNBQVMsU0FBUyxDQUFDLENBQVMsRUFBRSxDQUFTO0lBQ3JDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFBO0FBQ2hDLENBQUM7QUFFRDs7Ozs7R0FLRztBQUNILFNBQVMsV0FBVyxDQUFDLElBQXVCLEVBQUUsSUFBZ0I7SUFDNUQsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQTtJQUU5QiwrQ0FBK0M7SUFDL0MsSUFBSSxLQUFLLEtBQUssQ0FBQyxDQUFDO1FBQUUsT0FBTyxJQUFJLENBQUE7SUFFN0IsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQTtJQUNuQixJQUFJLEtBQUssR0FBRyxFQUFFLENBQUE7SUFFZCwwQ0FBMEM7SUFDMUMsbUNBQW1DO0lBQ25DLElBQUksQ0FBQyxHQUFHLFNBQVMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUE7SUFDdkIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxFQUFFO1FBQ1osSUFBSSxhQUFhLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQztZQUFFLE1BQUs7UUFDakMsRUFBRSxDQUFDLENBQUE7S0FD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

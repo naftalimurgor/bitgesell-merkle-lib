@@ -1,12 +1,18 @@
-var crypto = require('crypto')
-var fixtures = require('./fixtures')
-var merkle = require('../')
-var merkleProof = require('../proof')
-var tape = require('tape')
+
+const crypto = require('crypto')
+const tape = require('tape')
+
+const fixtures = require('./fixtures')
+const {
+  merkleTree,
+  merkleProof,
+  verify
+} = require('../build/main')
+
 
 tape('proofs, for each fixture', function (t) {
   fixtures.forEach(function (f) {
-    function digest (x) {
+    function digest(x) {
       return crypto.createHash(f.hash).update(x).digest()
     }
 
@@ -16,7 +22,7 @@ tape('proofs, for each fixture', function (t) {
 
       // map to Buffers for verify
       proof = proof.map(function (x) { return x && Buffer.from(x, 'hex') })
-      t.equal(merkleProof.verify(proof, digest), true, 'is verifiable')
+      t.equal(verify(proof, digest), true, 'is verifiable')
     })
   })
 
@@ -24,7 +30,7 @@ tape('proofs, for each fixture', function (t) {
 })
 
 tape('various node count proofs', function (t) {
-  function digest (x) {
+  function digest(x) {
     return crypto.createHash('sha1').update(x).digest()
   }
 
@@ -38,12 +44,12 @@ tape('various node count proofs', function (t) {
 
   for (var k = 0; k < maxNodes; ++k) {
     var bag = leaves.slice(0, k)
-    var tree = merkle(bag, digest)
+    var tree = merkleTree(bag, digest)
 
     bag.forEach(function (v) {
       var proof = merkleProof(tree, v)
 
-      t.equal(merkleProof.verify(proof, digest), true, 'is verifiable')
+      t.equal(verify(proof, digest), true, 'is verifiable')
     })
   }
 
